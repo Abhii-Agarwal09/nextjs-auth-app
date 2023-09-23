@@ -4,18 +4,20 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const router = useRouter();
+
   const [user, setUser] = useState({
+    username: "",
     email: "",
     password: "",
   });
 
-  const onLogin = async () => {
+  const onSignUp = async () => {
     try {
-      const res = await axios.post("/api/users/login", user);
+      const res = await axios.post("/api/users/signup", user);
       console.log(res);
-      router.push("/profile");
+      router.push("/login");
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +34,19 @@ const LoginPage = () => {
 
   return (
     <div className="container">
-      <h1 className="heading">Login</h1>
+      <h1 className="heading">Signup</h1>
+      <div className="input-container">
+        <label htmlFor="username">Username</label>
+        <input
+          className="input"
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter username"
+          value={user.username}
+          onChange={inputChangeHandler}
+        />
+      </div>
       <div className="input-container">
         <label htmlFor="email">Email</label>
         <input
@@ -57,14 +71,14 @@ const LoginPage = () => {
           onChange={inputChangeHandler}
         />
       </div>
-      <button onClick={onLogin} className="btn mt-4">
-        Login
+      <button onClick={onSignUp} className="btn mt-4">
+        Signup
       </button>
-      <Link href="/signup" className="mt-4">
-        Back to Signup
+      <Link href="/login" className="mt-4">
+        Back to Login
       </Link>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
