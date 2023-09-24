@@ -1,3 +1,4 @@
 import { getDataFromToken } from "./getDataFromToken";
+import { sendMail } from "./mailer";
 
-export { getDataFromToken };
+export { getDataFromToken, sendMail };
